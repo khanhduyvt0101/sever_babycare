@@ -1,0 +1,26 @@
+{
+  "name": "sever_babycare",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/khanhduyvt0101/sever_babycare.git"
+  },
+  "author": "khanhduy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/khanhduyvt0101/sever_babycare/issues"
+  },
+  "homepage": "https://github.com/khanhduyvt0101/sever_babycare#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "express": "^4.17.2"
+  }
+}
