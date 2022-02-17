@@ -33,7 +33,8 @@ app.use(
 
 app.use(express.json());
 
-app.use('/users', require('./router/users.routers.js'));
+app.use('/users', require('./routes/users.routers.js'));
+app.use('/api', require('./routes/crud.routers.js'));
 
 app.use(errors.errorHandler);
 
