@@ -5,7 +5,7 @@ const ObjectId = require('mongoose').Types.ObjectId;
 const Baby = require('../models/baby');
 
 // Get All baby
-router.get('/baby', (req, res) => {
+router.get('/baby1', (req, res) => {
     Baby.find({}, (err, data) => {
         if (!err) {
             res.send(data);
