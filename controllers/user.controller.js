@@ -23,8 +23,10 @@ exports.login = (req, res, next) => {
 
     userService.login({ username, password }, (err, result) => {
         if (err) {
+            console.log(err);
             return next(err);
         }
+        console.log(result);
         return res.status(200).send({
             message: 'Success',
             data: result,
