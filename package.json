@@ -1,28 +1,28 @@
 {
-  "name": "BABYCARE_API",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "start": "node ./database_mocking/generate-data && nodemon main.js"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "body-parser": "^1.19.0",
-    "casual": "^1.6.2",
-    "cors": "^2.8.5",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "express-unless": "^1.0.0",
-    "json-server": "^0.17.0",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.2.2",
-    "mongoose-unique-validator": "^3.0.0",
-    "nodemon": "^2.0.7",
-    "query-string": "^7.1.1",
-    "router": "^1.3.5"
-  }
+    "name": "BABYCARE_API",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "node ./database_mocking/generate-data && nodemon main.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "bcryptjs": "^2.4.3",
+        "body-parser": "^1.19.0",
+        "casual": "^1.6.2",
+        "cors": "^2.8.5",
+        "dotenv": "^8.2.0",
+        "express": "^4.17.1",
+        "express-unless": "^1.0.0",
+        "json-server": "^0.17.0",
+        "jsonwebtoken": "^8.5.1",
+        "mongoose": "^5.11.14",
+        "mongoose-unique-validator": "^3.0.0",
+        "nodemon": "^2.0.7",
+        "query-string": "^7.1.1",
+        "router": "^1.3.5"
+    }
 }
