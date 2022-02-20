@@ -16,7 +16,6 @@ router.get('/baby1', (req, res) => {
 });
 
 //Get Single Baby (2nd Way)
-
 router.get('/api/baby/:id', (req, res) => {
     if (!ObjectId.isValid(req.params.id))
         return res
@@ -32,7 +31,7 @@ router.get('/api/baby/:id', (req, res) => {
     });
 });
 
-// Save Baby
+// Add Baby
 router.post('/baby/add', (req, res) => {
     const emp = new Baby({
         gender: req.body.gender,
@@ -56,7 +55,6 @@ router.post('/baby/add', (req, res) => {
 });
 
 // Update Baby
-
 router.put('/baby/update/:id', (req, res) => {
     const emp = {
         birth: req.body.birth,

@@ -1,0 +1,18 @@
+@baseUrl = http://localhost:3000
+
+# @name login
+
+POST {{baseUrl}}/users/login
+Content-Type: application/json
+
+{
+    "username": "Duy11",
+    "password": "123456789"
+}
+
+###
+
+# @name getAllBaby
+GET {{baseUrl}}/api-mocking/categories
+Content-Type: application/json
+Authorization: Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiRHV5MTEiLCJpYXQiOjE2NDUzNDM3NDMsImV4cCI6MTY0NTM0NzM0M30.-92choOatoQivvEJpqe4P9NmMQLv0k5EagMIrpNq8AQ

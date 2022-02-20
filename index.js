@@ -4,23 +4,19 @@ const dbConfig = require('./config/db.config');
 const auth = require('./middlewares/auth');
 const errors = require('./middlewares/errors');
 const unless = require('express-unless');
+var jsonServer = require('json-server');
 const app = express();
 
 mongoose.Promise = global.Promise;
-mongoose
-    .connect(dbConfig.db, {
-        useNewUrlParser: true,
-        useUnifledTopology: true,
-    })
-    .then(
-        () => {
-            console.log('Database connected');
-        },
+mongoose.connect(dbConfig.db, {}).then(
+    () => {
+        console.log('Database connected');
+    },
 
-        (error) => {
-            console.log('Database cant be connected' + error);
-        }
-    );
+    (error) => {
+        console.log('Database cant be connected' + error);
+    }
+);
 auth.authenticateToken.unless = unless;
 app.use(
     auth.authenticateToken.unless({
@@ -31,10 +27,36 @@ app.use(
     })
 );
 
+const router_jsonServer = jsonServer.router('./database_mocking/db.json');
+router_jsonServer.render = (req, res) => {
+    // Check GET with pagination
+    // If yes, custom output
+    const headers = res.getHeaders();
+
+    const totalCountHeader = headers['x-total-count'];
+    if (req.method === 'GET' && totalCountHeader) {
+        const queryParams = queryString.parse(req._parsedUrl.query);
+
+        const result = {
+            data: res.locals.data,
+            pagination: {
+                _page: Number.parseInt(queryParams._page) || 1,
+                _limit: Number.parseInt(queryParams._limit) || 10,
+                _totalRows: Number.parseInt(totalCountHeader),
+            },
+        };
+
+        return res.jsonp(result);
+    }
+    res.jsonp(res.locals.data);
+};
+
 app.use(express.json());
 
 app.use('/users', require('./routes/users.routers.js'));
 app.use('/api', require('./routes/crud.routers.js'));
+
+app.use('/api-mocking', jsonServer.defaults(), router_jsonServer);
 
 app.use(errors.errorHandler);
 
