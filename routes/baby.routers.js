@@ -4,6 +4,7 @@ const ObjectId = require('mongoose').Types.ObjectId;
 const image = require('../models/image.model');
 const multer = require('multer');
 const Baby = require('../models/baby.model');
+const ImageModel = require('../models/image.model');
 
 const Storage = multer.diskStorage({
     destination: 'uploads',
@@ -13,13 +14,36 @@ const Storage = multer.diskStorage({
 });
 
 const upload = multer({
-    storage: Storage
-}).single('testImage')
+    storage: Storage,
+}).single('testImage');
 
-router.post('/upload')
+router.post('/image/upload', (req, res) => {
+    upload(req, res, (err) => {
+        if (err) {
+            console.log(err);
+        } else {
+            const newImage = new ImageModel({
+                name: req.body.name,
+                // image: {
+                //     data: req.file.fieldname,
+                //     contentType: 'image/png',
+                // },
+            });
+            newImage
+                .save()
+                .then((image) => {
+                    res.status(200).json({
+                        success: true,
+                        image,
+                    });
+                })
+                .catch((err) => res.status(500).json(err));
+        }
+    });
+});
 
 // Get All baby
-router.get('/baby', (req, res) => {
+router.get('/', (req, res) => {
     Baby.find({}, (err, data) => {
         if (!err) {
             res.send('All baby: ', data);
@@ -30,7 +54,7 @@ router.get('/baby', (req, res) => {
 });
 
 //Get Single Baby
-router.get('/baby/:id', (req, res) => {
+router.get('/:id', (req, res) => {
     if (!ObjectId.isValid(req.params.id))
         return res.status(400).send(`No baby With Given ID : ${req.params.id}`);
 
@@ -44,7 +68,7 @@ router.get('/baby/:id', (req, res) => {
 });
 
 // Add Baby
-router.post('/baby/add', (req, res) => {
+router.post('/add', (req, res) => {
     const emp = new Baby({
         gender: req.body.gender,
         name: req.body.name,
@@ -66,7 +90,7 @@ router.post('/baby/add', (req, res) => {
 });
 
 // Update Baby
-router.put('/baby/update/:id', (req, res) => {
+router.put('/update/:id', (req, res) => {
     const emp = {
         birth: req.body.birth,
         gender: req.body.gender,
@@ -94,7 +118,7 @@ router.put('/baby/update/:id', (req, res) => {
 });
 
 // Delete Baby
-router.delete('/baby/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
     Baby.findByIdAndRemove(req.params.id, (err, data) => {
         if (!err) {
             // res.send(data);
