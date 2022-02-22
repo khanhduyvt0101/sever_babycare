@@ -54,7 +54,7 @@ router_jsonServer.render = (req, res) => {
 app.use(express.json());
 
 app.use('/users', require('./routes/users.routers.js'));
-app.use('/api', require('./routes/crud.routers.js'));
+app.use('/api', require('./routes/baby.routers.js'));
 
 app.use('/api-mocking', jsonServer.defaults(), router_jsonServer);
 
