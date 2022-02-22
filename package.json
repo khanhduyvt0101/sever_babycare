@@ -5,7 +5,7 @@
     "main": "index.js",
     "scripts": {
         "start": "node ./database_mocking/generate-data && nodemon main.js",
-        "main": "node ./database_mocking/generate-data && nodemon main.js"
+        "main": "npm install && node ./database_mocking/generate-data && nodemon main.js"
     },
     "keywords": [],
     "author": "",
