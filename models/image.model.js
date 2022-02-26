@@ -5,10 +5,10 @@ const ImageSchema = mongoose.Schema({
         type: String,
         required: true,
     },
-    // image: {
-    //     data: Buffer,
-    //     contentType: String,
-    // },
+    image: {
+        data: Buffer,
+        contentType: String,
+    },
 });
 
 const imageModel = mongoose.model('image', ImageSchema);

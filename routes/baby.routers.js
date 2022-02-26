@@ -15,7 +15,7 @@ const Storage = multer.diskStorage({
 
 const upload = multer({
     storage: Storage,
-}).single('testImage');
+}).fields([{name:'image',maxCount:1}]);
 
 router.post('/image/upload', (req, res) => {
     upload(req, res, (err) => {
@@ -24,10 +24,10 @@ router.post('/image/upload', (req, res) => {
         } else {
             const newImage = new ImageModel({
                 name: req.body.name,
-                // image: {
-                //     data: req.file.fieldname,
-                //     contentType: 'image/png',
-                // },
+                image: {
+                    data: req.file,
+                    contentType: 'image/png',
+                },
             });
             newImage
                 .save()

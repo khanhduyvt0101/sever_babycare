@@ -1,14 +1,14 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const dbConfig = require('./config/db.config');
 const auth = require('./middlewares/auth');
 const errors = require('./middlewares/errors');
 const unless = require('express-unless');
 var jsonServer = require('json-server');
+const { db } = require('./config/db.config');
 const app = express();
 
 mongoose.Promise = global.Promise;
-mongoose.connect(dbConfig.db, {}).then(
+mongoose.connect(db, {}).then(
     () => {
         console.log('Database connected');
     },
