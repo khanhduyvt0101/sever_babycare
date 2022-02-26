@@ -4,19 +4,12 @@ const auth = require('./middlewares/auth');
 const errors = require('./middlewares/errors');
 const unless = require('express-unless');
 var jsonServer = require('json-server');
-const { db } = require('./config/db.config');
+const connectDB = require('./mongoDB/db');
 const app = express();
+require('dotenv').config();
 
 mongoose.Promise = global.Promise;
-mongoose.connect(db, {}).then(
-    () => {
-        console.log('Database connected');
-    },
-
-    (error) => {
-        console.log('Database cant be connected' + error);
-    }
-);
+connectDB();
 auth.authenticateToken.unless = unless;
 app.use(
     auth.authenticateToken.unless({
