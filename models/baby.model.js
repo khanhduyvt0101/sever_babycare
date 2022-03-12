@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose'
 const { Schema } = mongoose;
-const uniqueValidator = require('mongoose-unique-validator');
+import uniqueValidator from 'mongoose-unique-validator'
 
 const userSchema = new Schema({
     birth: {
@@ -36,4 +36,4 @@ userSchema.set('toJSON', {
 userSchema.plugin(uniqueValidator, { message: 'Email already in use.' });
 
 const Baby = mongoose.model('baby', userSchema);
-module.exports = Baby;
+export default Baby;

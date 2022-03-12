@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose'
 const { Schema } = mongoose;
-const uniqueValidator = require('mongoose-unique-validator');
+import uniqueValidator from 'mongoose-unique-validator'
 
 const userSchema = new Schema({
     username: {
@@ -20,18 +20,18 @@ const userSchema = new Schema({
         type: Date,
         require: Date.now(),
     },
-});
+})
 
 userSchema.set('toJSON', {
     transform: (document, returnedObject) => {
-        returnedObject.id = returnedObject._id.toString();
-        delete returnedObject._id;
-        delete returnedObject.__v;
-        delete returnedObject.password;
+        returnedObject.id = returnedObject._id.toString()
+        delete returnedObject._id
+        delete returnedObject.__v
+        delete returnedObject.password
     },
 });
 
-userSchema.plugin(uniqueValidator, { message: 'Email already in use.' });
+userSchema.plugin(uniqueValidator, { message: 'Email already in use.' })
 
-const User = mongoose.model('user', userSchema);
-module.exports = User;
+const User = mongoose.model('user', userSchema)
+export default User

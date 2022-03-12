@@ -1,25 +1,25 @@
-const jwt = require('jsonwebtoken');
+import jwt from 'jsonwebtoken'
 
 function authenticateToken(req, res, next) {
-    const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1];
+    const authHeader = req.headers['authorization']
+    const token = authHeader && authHeader.split(' ')[1]
 
-    if (token == null) return res.sendStatus(401);
+    if (token == null) return res.sendStatus(401)
 
     jwt.verify(token, 'Auth_Key', (err, user) => {
-        if (err) return res.sendStatus(403);
+        if (err) return res.sendStatus(403)
         req.user = user;
-        next();
-    });
+        next()
+    })
 }
 
 function generateAccessToken(username) {
     return jwt.sign({ data: username }, 'Auth_Key', {
         expiresIn: '24h',
-    });
+    })
 }
 
-module.exports = {
+export default {
     authenticateToken,
     generateAccessToken,
-};
+}
