@@ -1,15 +1,17 @@
-const multer = require('multer');
-const GridFsStorage = require('multer-gridfs-storage').GridFsStorage;
+import multer from 'multer'
+import { GridFsStorage } from 'multer-gridfs-storage'
+import dotenv from 'dotenv'
+dotenv.config()
 
 const storage = new GridFsStorage({
     url: process.env.MONGO_URL,
     options: { useNewUrlParser: true, useUnifiedTopology: true },
     file: (req, file) => {
-        const match = ['image/png', 'image/jpeg'];
+        const match = ['image/png', 'image/jpeg']
 
         if (match.indexOf(file.mimetype) === -1) {
-            const filename = file.originalname;
-            return filename;
+            const filename = file.originalname
+            return filename
         }
 
         return {
@@ -19,4 +21,4 @@ const storage = new GridFsStorage({
     },
 });
 
-module.exports = multer({ storage });
+export default multer({ storage })

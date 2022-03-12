@@ -1,12 +1,16 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const auth = require('./middlewares/auth');
-const errors = require('./middlewares/errors');
-const unless = require('express-unless');
-var jsonServer = require('json-server');
-const connectDB = require('./mongoDB/db');
-const app = express();
-require('dotenv').config();
+import express from 'express'
+import bodyParser from 'body-parser'
+import mongoose from 'mongoose'
+import auth from './middlewares/auth.js'
+import errors from './middlewares/errors.js'
+import unless from 'express-unless'
+import jsonServer from 'json-server'
+import { connectDB } from './mongoDB/db.js'
+import dotenv from 'dotenv'
+import userRouter from './routes/users.routers.js'
+import babyRouter from './routes/baby.routers.js'
+const app = express()
+dotenv.config()
 
 mongoose.Promise = global.Promise;
 connectDB();
@@ -20,7 +24,7 @@ app.use(
     })
 );
 
-const router_jsonServer = jsonServer.router('./database_mocking/db.json');
+const router_jsonServer = jsonServer.router('./database_mocking/db.json')
 router_jsonServer.render = (req, res) => {
     // Check GET with pagination
     // If yes, custom output
@@ -39,20 +43,21 @@ router_jsonServer.render = (req, res) => {
             },
         };
 
-        return res.jsonp(result);
+        return res.jsonp(result)
     }
-    res.jsonp(res.locals.data);
+    res.jsonp(res.locals.data)
 };
 
-app.use(express.json());
+app.use(express.json())
+app.use(bodyParser.json())
 
-app.use('/users', require('./routes/users.routers.js'));
-app.use('/baby', require('./routes/baby.routers.js'));
+app.use('/users', userRouter)
+app.use('/baby', babyRouter)
 
-app.use('/api-mocking', jsonServer.defaults(), router_jsonServer);
+app.use('/api-mocking', jsonServer.defaults(), router_jsonServer)
 
-app.use(errors.errorHandler);
+app.use(errors.errorHandler)
 
-app.listen(process.env.PORT || 3000, () => {
-    console.log('Ready to port 3000');
+app.listen(process.env.PORT || 3001, () => {
+    console.log(`Ready to port ${process.env.PORT}`)
 });

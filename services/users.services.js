@@ -1,6 +1,6 @@
-const User = require('../models/user.model');
-const bcrypt = require('bcryptjs');
-const auth = require('../middlewares/auth.js');
+import User from '../models/user.model.js'
+import bcrypt from 'bcryptjs'
+import auth from '../middlewares/auth.js'
 
 async function login({ username, password }, callback) {
     const user = await User.findOne({ username });
@@ -36,7 +36,7 @@ async function register(param, callback) {
         });
 }
 
-module.exports = {
+export default {
     login,
     register,
 };
