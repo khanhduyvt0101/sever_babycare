@@ -9,6 +9,7 @@ import { connectDB } from './mongoDB/db.js'
 import dotenv from 'dotenv'
 import userRouter from './routes/users.routers.js'
 import babyRouter from './routes/baby.routers.js'
+import BMIRouter from './routes/bmi.routers.js';
 const app = express()
 dotenv.config()
 
@@ -53,6 +54,7 @@ app.use(bodyParser.json())
 
 app.use('/users', userRouter)
 app.use('/baby', babyRouter)
+app.use('/bmi', BMIRouter)
 
 app.use('/api-mocking', jsonServer.defaults(), router_jsonServer)
 

@@ -1,26 +1,17 @@
 import mongoose from 'mongoose'
 const { Schema } = mongoose;
-import uniqueValidator from 'mongoose-unique-validator'
 
 const userSchema = new Schema({
-    birth: {
-        type: Date,
-        require: true,
-    },
-    gender: {
+    type: {
         type: String,
         require: true,
     },
-    name: {
+    idBaby: {
         type: String,
         require: true,
     },
-    idAccount: {
-        type: String,
-        require: true,
-    },
-    idImage: {
-        type: String,
+    value: {
+        type: Number,
         require: true,
     },
 });
@@ -33,7 +24,5 @@ userSchema.set('toJSON', {
     },
 });
 
-userSchema.plugin(uniqueValidator, { message: 'Email already in use.' });
-
-const Baby = mongoose.model('baby', userSchema);
-export default Baby;
+const BMI = mongoose.model('bmi', userSchema);
+export default BMI;

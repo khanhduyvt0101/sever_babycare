@@ -2,7 +2,7 @@ import bcryptjs from 'bcryptjs'
 import userService from '../services/users.services.js'
 
 const register = (req, res, next) => {
-    const { password } = req.body;
+    const { password } = req.body
     const salt = bcryptjs.genSaltSync(10)
 
     req.body.password = bcryptjs.hashSync(password, salt)
@@ -14,8 +14,8 @@ const register = (req, res, next) => {
         return res.status(200).send({
             message: 'Success',
             data: result,
-        });
-    });
+        })
+    })
 };
 
 const login = (req, res, next) => {
@@ -26,12 +26,12 @@ const login = (req, res, next) => {
             console.log(err)
             return next(err)
         }
-        console.log(result);
+        console.log(result)
         return res.status(200).send({
             message: 'Success',
             data: result,
-        });
-    });
+        })
+    })
 };
 
 const userProfile = (req, res, next) => {
