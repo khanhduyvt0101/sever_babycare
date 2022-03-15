@@ -57,6 +57,7 @@ async function addBaby(req, res) {
     } else {
         let standardRes = _.cloneDeep(response)
         const emp = new Baby({
+            birth: req.body.birth,
             gender: req.body.gender,
             name: req.body.name,
             idAccount: req.body.idAccount,
@@ -131,7 +132,7 @@ async function deleteBaby(req, res) {
 
 function checkValidFullFieldBody(req) {
     let standardRes = _.cloneDeep(response)
-    if (!req.body.gender || !req.body.name || !req.body.idAccount || !req.body.idImage) {
+    if (!req.body.gender || !req.body.name || !req.body.idAccount || !req.body.idImage || !req.body.bird) {
         standardRes.status = 400
         standardRes.message = `Missing other field in body`
         return standardRes
